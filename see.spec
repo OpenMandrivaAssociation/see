@@ -14,7 +14,6 @@ Source:		%{name}-%{version}_snapshot.tar.bz2
 URL:		http://www.adaptive-enterprises.com.au/~d/software/see/
 License:	BSD
 Group:		Development/Other
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	libgc-devel
 
 %description
