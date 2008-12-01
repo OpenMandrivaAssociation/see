@@ -1,16 +1,14 @@
-%define name	see
-%define version	2.1.1206
-%define release %mkrel 4
+%define major		1
+%define libname		%mklibname %{name} %{major}
+%define develname	%mklibname %{name} -d
 
-%define major	1
-%define libname %mklibname %name %major
-
-Name: 	 	%{name}
+Name: 	 	see
 Summary: 	JavaScript interpreter and runtime library
-Version: 	%{version}
-Release: 	%{release}
-
-Source:		%{name}-%{version}_snapshot.tar.bz2
+Version: 	3.0.1376
+Release: 	%{mkrel 5}
+Source0:	%{name}-%{version}.tar.gz
+Patch0:		see-3.0.1376-underlink.patch
+# During 'temporary' move: http://125.168.50.158/~d/software/see/
 URL:		http://www.adaptive-enterprises.com.au/~d/software/see/
 License:	BSD
 Group:		Development/Other
@@ -34,21 +32,23 @@ Group:          System/Libraries
 %description -n %{libname}
 Dynamic libraries from %name.
 
-%package -n 	%{libname}-devel
+%package -n 	%{develname}
 Summary: 	Header files and static libraries from %name
 Group: 		Development/C
-Requires: 	%{libname} >= %{version}
-Provides: 	lib%{name}-devel = %{version}-%{release}
+Requires: 	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release} 
-Obsoletes: 	%name-devel
+Obsoletes: 	%{name}-devel < %{version}-%{release}
+Obsoletes:	%{mklibname see 1 -d}
 
-%description -n %{libname}-devel
+%description -n %{develname}
 Libraries and includes files for developing programs based on %name.
 
 %prep
-%setup -q -n %{name}-%{version}_snapshot
+%setup -q
+%patch0 -p1 -b .underlink
 
 %build
+autoreconf
 %configure2_5x
 %make
 										
@@ -77,13 +77,14 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/see
 %{_libdir}/see/*.so.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_bindir}/libsee-config
 %{_includedir}/*
 %{_libdir}/*.so
-%{_libdir}/see/*.so
+%{_libdir}/%{name}/*.so
 %{_libdir}/*.a
-%{_libdir}/see/*.a
+%{_libdir}/%{name}/*.a
 %{_libdir}/*.la
-%{_libdir}/see/*.la
+%{_libdir}/%{name}/*.la
+%{_libdir}/pkgconfig/%{name}.pc
