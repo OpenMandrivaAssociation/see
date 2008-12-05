@@ -5,9 +5,11 @@
 Name: 	 	see
 Summary: 	JavaScript interpreter and runtime library
 Version: 	3.0.1376
-Release: 	%{mkrel 5}
+Release: 	%{mkrel 6}
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		see-3.0.1376-underlink.patch
+# Build the library with -fPIC (needed by tkhtml3) - AdamW 2008/12
+Patch1:		see-3.0.1376-fpic.patch
 # During 'temporary' move: http://125.168.50.158/~d/software/see/
 URL:		http://www.adaptive-enterprises.com.au/~d/software/see/
 License:	BSD
@@ -46,6 +48,7 @@ Libraries and includes files for developing programs based on %name.
 %prep
 %setup -q
 %patch0 -p1 -b .underlink
+%patch1 -p1 -b .fpic
 
 %build
 autoreconf
