@@ -5,7 +5,7 @@
 Name: 	 	see
 Summary: 	JavaScript interpreter and runtime library
 Version: 	3.0.1376
-Release: 	%{mkrel 6}
+Release: 	%{mkrel 7}
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		see-3.0.1376-underlink.patch
 # Build the library with -fPIC (needed by tkhtml3) - AdamW 2008/12
