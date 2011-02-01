@@ -5,7 +5,7 @@
 Name: 	 	see
 Summary: 	JavaScript interpreter and runtime library
 Version: 	3.1.1424
-Release: 	%{mkrel 2}
+Release: 	%{mkrel 3}
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		see-3.1.1424-underlink.patch
 # Build the library with -fPIC (needed by tkhtml3) - AdamW 2008/12
@@ -51,6 +51,7 @@ Libraries and includes files for developing programs based on %name.
 %patch1 -p1 -b .fpic
 
 %build
+export CFLAGS="%optflags -DPIC -fPIC"
 %configure2_5x
 %make
 										
