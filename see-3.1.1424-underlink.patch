@@ -1,0 +1,24 @@
+diff -p -up see-3.1.1424/libsee/Makefile.am.underlink see-3.1.1424/libsee/Makefile.am
+--- see-3.1.1424/libsee/Makefile.am.underlink	2009-04-26 23:04:58.000000000 +0200
++++ see-3.1.1424/libsee/Makefile.am	2010-01-16 18:28:51.000000000 +0100
+@@ -59,7 +59,7 @@ if PLATFORM_POSIX
+ libsee_la_SOURCES += platform_posix.c
+ endif
+ 
+-libsee_la_LIBADD=  @LIBOBJS@
++libsee_la_LIBADD=  @LIBOBJS@ -lgc
+ libsee_la_LDFLAGS= -version-info $(libsee_version_info)
+ 
+ EXTRA_DIST=	   string.pl string.defs
+diff -p -up see-3.1.1424/libsee/Makefile.in.underlink see-3.1.1424/libsee/Makefile.in
+--- see-3.1.1424/libsee/Makefile.in.underlink	2010-01-16 18:29:52.000000000 +0100
++++ see-3.1.1424/libsee/Makefile.in	2010-01-16 18:29:31.000000000 +0100
+@@ -278,7 +278,7 @@ libsee_la_SOURCES = cfunction.c scope.c 
+ 	parse_const.c parse_codegen.h $(am__append_2) $(am__append_3) \
+ 	parse_print.h $(am__append_4) $(am__append_5) $(am__append_6) \
+ 	$(am__append_7) $(am__append_8)
+-libsee_la_LIBADD = @LIBOBJS@
++libsee_la_LIBADD = @LIBOBJS@ -lgc
+ libsee_la_LDFLAGS = -version-info $(libsee_version_info)
+ EXTRA_DIST = string.pl string.defs see.pc.in
+ bin_SCRIPTS = libsee-config

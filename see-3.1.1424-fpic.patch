@@ -1,0 +1,22 @@
+diff -p -up see-3.1.1424/libsee/Makefile.am.fpic see-3.1.1424/libsee/Makefile.am
+--- see-3.1.1424/libsee/Makefile.am.fpic	2010-01-16 18:32:34.000000000 +0100
++++ see-3.1.1424/libsee/Makefile.am	2010-01-16 18:32:34.000000000 +0100
+@@ -61,6 +61,7 @@ endif
+ 
+ libsee_la_LIBADD=  @LIBOBJS@ -lgc
+ libsee_la_LDFLAGS= -version-info $(libsee_version_info)
++libsee_la_CFLAGS= -DPIC -fPIC
+ 
+ EXTRA_DIST=	   string.pl string.defs
+ PERL=		   @PERL@
+diff -p -up see-3.1.1424/libsee/Makefile.in.fpic see-3.1.1424/libsee/Makefile.in
+--- see-3.1.1424/libsee/Makefile.in.fpic	2010-01-16 18:32:34.000000000 +0100
++++ see-3.1.1424/libsee/Makefile.in	2010-01-16 18:37:31.000000000 +0100
+@@ -280,6 +280,7 @@ libsee_la_SOURCES = cfunction.c scope.c 
+ 	$(am__append_7) $(am__append_8)
+ libsee_la_LIBADD = @LIBOBJS@ -lgc
+ libsee_la_LDFLAGS = -version-info $(libsee_version_info)
++libsee_la_CFLAGS= -DPIC -fPIC
+ EXTRA_DIST = string.pl string.defs see.pc.in
+ bin_SCRIPTS = libsee-config
+ INCLUDES = -I$(top_builddir)/include -I$(top_srcdir)/include
