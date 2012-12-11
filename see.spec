@@ -5,7 +5,7 @@
 Name: 	 	see
 Summary: 	JavaScript interpreter and runtime library
 Version: 	3.1.1424
-Release: 	%{mkrel 4}
+Release: 	5
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		see-3.1.1424-underlink.patch
 # Build the library with -fPIC (needed by tkhtml3) - AdamW 2008/12
@@ -14,8 +14,7 @@ Patch1:		see-3.1.1424-fpic.patch
 URL:		http://www.adaptive-enterprises.com.au/~d/software/see/
 License:	BSD
 Group:		Development/Other
-BuildRoot:	%{_tmppath}/%{name}-buildroot
-BuildRequires:	libgc-devel
+BuildRequires:	pkgconfig(bdw-gc)
 
 %description
 ECMAScript is a standardized language also known variously as JavaScript,
@@ -56,26 +55,13 @@ export CFLAGS="%optflags -DPIC -fPIC"
 %make
 										
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files
-%defattr(-,root,root)
 %doc AUTHORS COPYING README NEWS TODO doc/*.html
 %{_bindir}/see-shell
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.*
 %dir %{_libdir}/see
 %{_libdir}/see/*.so.*
@@ -88,6 +74,56 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}/*.so
 %{_libdir}/*.a
 %{_libdir}/%{name}/*.a
-%{_libdir}/*.la
-%{_libdir}/%{name}/*.la
 %{_libdir}/pkgconfig/%{name}.pc
+
+
+%changelog
+* Sun Feb 27 2011 Funda Wang <fwang@mandriva.org> 3.1.1424-4mdv2011.0
++ Revision: 640460
+- rebuild to obsolete old packages
+
+* Tue Feb 01 2011 Funda Wang <fwang@mandriva.org> 3.1.1424-3
++ Revision: 634760
+- really enable fPIC
+
+* Tue Feb 01 2011 Funda Wang <fwang@mandriva.org> 3.1.1424-2
++ Revision: 634731
+- rebuild
+
+* Sat Jan 16 2010 Jérôme Brenier <incubusss@mandriva.org> 3.1.1424-1mdv2011.0
++ Revision: 492454
+- new version 3.1.1424
+- redo Patch0 and Patch1 not to have to autoreconf
+- $RPM_BUILD_ROOT -> %%{buildroot}
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Fri Dec 05 2008 Adam Williamson <awilliamson@mandriva.org> 3.0.1376-6mdv2009.1
++ Revision: 310349
+- build the lib with -fPIC (or else tkhtml3 can't build)
+
+* Mon Dec 01 2008 Adam Williamson <awilliamson@mandriva.org> 3.0.1376-5mdv2009.1
++ Revision: 308734
+- add underlink.patch (fix underlinking)
+- correct upstream URLs etc
+- new release 3.0.1376
+- clean spec
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - rebuild
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+    - kill re-definition of %%buildroot on Pixel's request
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Fri May 04 2007 Austin Acton <austin@mandriva.org> 2.1.1206-1mdv2008.0
++ Revision: 22172
+- Import see
+
