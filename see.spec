@@ -5,7 +5,7 @@
 Name: 	 	see
 Summary: 	JavaScript interpreter and runtime library
 Version: 	3.1.1424
-Release: 	5
+Release: 	6
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		see-3.1.1424-underlink.patch
 # Build the library with -fPIC (needed by tkhtml3) - AdamW 2008/12
