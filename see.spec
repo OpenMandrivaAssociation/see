@@ -11,7 +11,7 @@ Patch0:		see-3.1.1424-underlink.patch
 # Build the library with -fPIC (needed by tkhtml3) - AdamW 2008/12
 Patch1:		see-3.1.1424-fpic.patch
 # During 'temporary' move: http://125.168.50.158/~d/software/see/
-URL:		http://www.adaptive-enterprises.com.au/~d/software/see/
+URL:		https://www.adaptive-enterprises.com.au/~d/software/see/
 License:	BSD
 Group:		Development/Other
 BuildRequires:	pkgconfig(bdw-gc)
