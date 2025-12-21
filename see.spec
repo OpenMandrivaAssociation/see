@@ -14,6 +14,11 @@ Patch1:		see-3.1.1424-fpic.patch
 URL:		https://www.adaptive-enterprises.com.au/~d/software/see/
 License:	BSD
 Group:		Development/Other
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(bdw-gc)
 
 %description
